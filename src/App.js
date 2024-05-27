@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import "leaflet/dist/leaflet.css";
+import Home from "./Views/Home";
+import { useContext, useState } from "react";
+import RecycleContext from "./context/RecycleContext";
+
+// 创建一个 Context
+// export const RecycleContext = React.createContext();
 
 function App() {
+  const [selectedCity, setSelectedCity] = useState("");
+  const [placeData, setPlaceData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RecycleContext.Provider
+      value={{
+        selectedCity,
+        setSelectedCity,
+        placeData,
+        setPlaceData,
+        loading,
+        setLoading,
+      }}
+    >
+      <Home />
+    </RecycleContext.Provider>
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <p>
+    //       Edit <code>src/App.js</code> and save to reload.
+    //     </p>
+    //     <a
+    //       className="App-link"
+    //       href="https://reactjs.org"
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //     >
+    //       Learn React
+    //     </a>
+    //   </header>
+    // </div>
   );
 }
 
