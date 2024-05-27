@@ -10,6 +10,9 @@ import {
   Box,
   List,
   ListItem,
+  Card,
+  CardContent,
+  Chip,
   ListItemText,
 } from "@mui/material";
 import RecycleContext from "../../context/RecycleContext";
@@ -71,38 +74,109 @@ const TaiwanCitySelect = () => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <FormControl fullWidth>
-        <InputLabel id="taiwan-city-select-label">選擇縣市</InputLabel>
-        <Select
-          labelId="taiwan-city-select-label"
-          id="taiwan-city-select"
-          value={selectedCity}
-          label="選擇縣市"
-          onChange={handleCityChange}
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <Box sx={{ flex: 0 }}>
+        <FormControl fullWidth>
+          <InputLabel id="taiwan-city-select-label">選擇縣市</InputLabel>
+          <Select
+            labelId="taiwan-city-select-label"
+            id="taiwan-city-select"
+            value={selectedCity}
+            label="選擇縣市"
+            onChange={handleCityChange}
+          >
+            {taiwanCities.map((city, index) => (
+              <MenuItem key={index} value={city}>
+                {city}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Typography variant="h6">選擇的城市：{selectedCity}</Typography>
+      </Box>
+      <Box sx={{ flex: 1, overflowY: "scroll" }}>
+        {loading && <CircularProgress />} {/* 顯示加載指示器 */}
+        {/* {cityData && <div></div>} */}
+        <Box
+          sx={{
+            /* needs vendor prefixes */
+            // overflow: "scroll",
+          }}
         >
-          {taiwanCities.map((city, index) => (
-            <MenuItem key={index} value={city}>
-              {city}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <Typography variant="h6">選擇的城市：{selectedCity}</Typography>
-      {loading && <CircularProgress />} {/* 顯示加載指示器 */}
-      {/* {cityData && <div></div>} */}
-      <Box sx={{ maxHeight: 300, overflow: "auto" }}>
-        {placeData && (
-          <>
-            <List>
-              {placeData.map((place) => (
-                <ListItem key={place._id}>
-                  <ListItemText primary={place.factoryname} />
-                </ListItem>
-              ))}
-            </List>
-          </>
-        )}
+          {placeData && (
+            <>
+              <List>
+                {placeData.map((place) => {
+                  //   console.log(place);
+                  return (
+                    <ListItem key={place._id} sx={{ padding: "4px" }}>
+                      <Card variant="outlined" sx={{ width: "100%" }}>
+                        <CardContent>
+                          <Typography variant="h6" component="div">
+                            {place.factoryname}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            component="div"
+                          >
+                            <div>地址:{place.formattedAddress}</div>
+                            <div>
+                              電話:
+                              {place.nationalPhoneNumber
+                                ? place.nationalPhoneNumber
+                                : ""}
+                            </div>
+
+                            {place.regularOpeningHours &&
+                            place.regularOpeningHours.weekdayDescriptions ? (
+                              <div>
+                                {place.regularOpeningHours.weekdayDescriptions.map(
+                                  (day) => (
+                                    <div>{day}</div>
+                                  )
+                                )}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                          </Typography>
+
+                          <Box
+                            sx={
+                              {
+                                //   display: "flex",
+                                //   overflowX: "auto",
+                                //   maxWidth: "100%",
+                              }
+                            }
+                          >
+                            {place.category.map((c, index) => (
+                              <Chip
+                                key={index}
+                                label={c}
+                                size="small"
+                                sx={{ margin: "3px", fontSize: "10px" }}
+                              />
+                            ))}
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </>
+          )}
+        </Box>
       </Box>
     </Box>
   );

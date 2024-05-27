@@ -4,19 +4,19 @@ import { Box, Container, Typography } from "@mui/material";
 import Search from "../../Components/Search";
 // const RecycleContext = React.createContext();
 export default function Home() {
-  
-
   return (
     <Box sx={{ height: "100vh", width: "100%", display: "flex", padding: 0 }}>
       <Box
         sx={{
           flex: 1,
-          backgroundColor: "#f0f0f0",
+          
           padding: 2,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          maxHeight: "100%",
+          
+          //   display: "flex",
+          //   flexDirection: "column",
+          //   justifyContent: "center",
+          //   alignItems: "center",
         }}
       >
         <Search />
@@ -24,7 +24,7 @@ export default function Home() {
       <Box
         sx={{
           flex: 2,
-          backgroundColor: "#d0d0d0",
+          
           //   padding: 2,
           display: "flex",
           flexDirection: "column",
