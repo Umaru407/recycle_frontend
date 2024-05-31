@@ -16,6 +16,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import RecycleContext from "../../context/RecycleContext";
+import ImageClassify from "../ImageClassify";
 
 const taiwanCities = [
   "台北市",
@@ -63,6 +64,7 @@ const TaiwanCitySelect = () => {
     try {
       const response = await axios.get(
         `https://recycle-backend.onrender.com/api/address/${city}`
+        //`http://localhost:8080/api/address/${city}`
       );
       setPlaceData(response.data);
     } catch (error) {
@@ -101,15 +103,21 @@ const TaiwanCitySelect = () => {
           </Select>
         </FormControl>
         <Typography variant="h6">選擇的城市：{selectedCity}</Typography>
+
+        <Box sx={{ flex: 0 }}>
+          <ImageClassify></ImageClassify>
+        </Box>
       </Box>
       <Box sx={{ flex: 1, overflowY: "scroll" }}>
         {loading && <CircularProgress />} {/* 顯示加載指示器 */}
         {/* {cityData && <div></div>} */}
         <Box
-          sx={{
-            /* needs vendor prefixes */
-            // overflow: "scroll",
-          }}
+          sx={
+            {
+              /* needs vendor prefixes */
+              // overflow: "scroll",
+            }
+          }
         >
           {placeData && (
             <>

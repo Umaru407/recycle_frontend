@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import Home from "./Views/Home";
 import { useContext, useState } from "react";
 import RecycleContext from "./context/RecycleContext";
+import ImageClassify from "./Components/ImageClassify";
 
 // 创建一个 Context
 // export const RecycleContext = React.createContext();
@@ -24,6 +25,7 @@ function App() {
         setLoading,
       }}
     >
+      {/* <ImageClassify /> */}
       <Home />
     </RecycleContext.Provider>
     // <div className="App">
