@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import RecycleContext from "../../context/RecycleContext";
 import ImageClassify from "../ImageClassify";
+import TimeSearch from "../TimeSearch";
 
 const taiwanCities = [
   "台北市",
@@ -103,7 +104,9 @@ const TaiwanCitySelect = () => {
           </Select>
         </FormControl>
         <Typography variant="h6">選擇的城市：{selectedCity}</Typography>
-
+        <Box  sx={{ flex: 0 }}>
+          <TimeSearch />
+        </Box>
         <Box sx={{ flex: 0 }}>
           <ImageClassify></ImageClassify>
         </Box>

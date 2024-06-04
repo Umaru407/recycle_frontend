@@ -70,7 +70,7 @@ const ImageClassify = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8080/getClassify",
+        "http://localhost:3000/getClassify",
         formData,
         {
           headers: {
