@@ -68,7 +68,7 @@ const TaiwanCitySelect = () => {
     try {
       console.log(query);
       const response = await axios.get(
-        `http://localhost:3000/api/search?${query}`
+        `https://recycle-backend.onrender.com/api/search?${query}`
       );
       setPlaceData(response.data);
       // setError(null);
