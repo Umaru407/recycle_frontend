@@ -50,7 +50,7 @@ const TaiwanCitySelect = () => {
     e.preventDefault();
     setLoading(true);
     let query = "";
-    if (selectedCity != "") {
+    if (selectedCity != "" && selectedCity != "所有縣市") {
       query += `location=${selectedCity}&`;
     }
     if (selectedTime.length > 0) {

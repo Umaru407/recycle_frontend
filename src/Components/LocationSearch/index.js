@@ -11,6 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import RecycleContext from "../../context/RecycleContext";
 
 const taiwanCities = [
+  "所有縣市",
   "台北市",
   "新北市",
   "桃園市",
