@@ -42,7 +42,7 @@ export default function Map() {
 
     // 计算所有经度和纬度的总和
     places.forEach((place) => {
-      console.log(place);
+      // console.log(place);
       totalLatitude += place.location.latitude;
       totalLongitude += place.location.longitude;
     });

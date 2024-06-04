@@ -13,7 +13,8 @@ function App() {
   const [selectedCity, setSelectedCity] = useState("");
   const [placeData, setPlaceData] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [selectedTime, setSelectedTime] = useState([]);
+  const [category, setCategory] = useState("");
   return (
     <RecycleContext.Provider
       value={{
@@ -23,6 +24,9 @@ function App() {
         setPlaceData,
         loading,
         setLoading,
+        selectedTime,
+        setSelectedTime,
+        category, setCategory
       }}
     >
       {/* <ImageClassify /> */}
