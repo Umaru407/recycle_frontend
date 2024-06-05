@@ -15,6 +15,7 @@ import {
   Chip,
   ListItemText,
   Button,
+  Skeleton,
 } from "@mui/material";
 import RecycleContext from "../../context/RecycleContext";
 import ImageClassify from "../ImageClassify";
@@ -32,6 +33,7 @@ const TaiwanCitySelect = () => {
     selectedTime,
     category,
     setCategory,
+    setMapReset,
 
     setSelectedTime,
   } = useContext(RecycleContext);
@@ -49,6 +51,7 @@ const TaiwanCitySelect = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    // setPlaceData([])
     let query = "";
     if (selectedCity != "" && selectedCity != "所有縣市") {
       query += `location=${selectedCity}&`;
@@ -80,6 +83,7 @@ const TaiwanCitySelect = () => {
       }
     }
     setLoading(false);
+    setMapReset(true);
   };
 
   //   const [selectedCity, setSelectedCity] = useState("");
@@ -115,7 +119,14 @@ const TaiwanCitySelect = () => {
         </Button>
       </form>
       <Box sx={{ flex: 1, overflowY: "scroll" }}>
-        {loading && <CircularProgress />} {/* 顯示加載指示器 */}
+        {loading && (
+          <Box sx={{marginTop:1}}>
+            <Skeleton sx={{marginBottom:1}} variant="rounded" width={"100%"} height={200} />
+            <Skeleton sx={{marginBottom:1}} variant="rounded" width={"100%"} height={200} />
+            <Skeleton sx={{marginBottom:1}} variant="rounded" width={"100%"} height={200} />
+          </Box>
+        )}{" "}
+        {/* 顯示加載指示器 */}
         {/* {cityData && <div></div>} */}
         <Box
           sx={

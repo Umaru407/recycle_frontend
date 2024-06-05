@@ -15,12 +15,16 @@ import RecycleContext from "../../context/RecycleContext";
 
 function MyMap({ mapCenter, placeData }) {
   const map = useMap();
+  const { selectedCity, mapReset, setMapReset } = useContext(RecycleContext);
   // const { setFocusSpot } = useContext(TravelInfoStateContext);
 
-  console.log(placeData.length);
-  const zoom = placeData.length === 0 ? 8 : 11;
+  // console.log(placeData.length);
 
-  map.flyTo(mapCenter, zoom, true);
+  const zoom = placeData.length === 0 ? 8 : selectedCity == "所有縣市" ? 8 : 11;
+
+  if (mapReset) map.flyTo(mapCenter, zoom, true);
+  setMapReset(false);
+
   //   map.on("moveend", () => {
   //     setFocusSpot(null);
   //   });

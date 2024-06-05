@@ -9,6 +9,8 @@ import {
   CardActionArea,
   CardActions,
   Icon,
+  Container,
+  Skeleton,
 } from "@mui/material";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
@@ -31,40 +33,9 @@ const VisuallyHiddenInput = styled("input")({
 const ImageClassify = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   // const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [localImageUrl, setLocalImageUrl] = useState("");
-  const {
-    selectedCity,
-    setSelectedCity,
-    placeData,
-    setPlaceData,
-    loading,
-    setLoading,
-    category,
-    setCategory,
-  } = useContext(RecycleContext);
-
-  // useEffect(() => {
-  //   if (result) handleResultChange();
-  // }, [result]);
-
-  // const handleResultChange = async (event) => {
-  //   // const city = event.target.value;
-  //   // setSelectedCity(city);
-
-  //   console.log(result);
-  //   try {
-  //     const response = await axios.get(
-  //       // `https://recycle-backend.onrender.com/api/categories/${result}`
-  //       `http://localhost:3000/api/categories/${result}`
-  //     );
-  //     setPlaceData(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching city data:", error);
-  //     setPlaceData(null);
-  //   }
-
-  //   setLoading(false);
-  // };
+  const { category, setCategory } = useContext(RecycleContext);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -96,7 +67,7 @@ const ImageClassify = () => {
         }
       );
       setCategory(response.data.result);
-      alert("File uploaded successfully!");
+      // alert("File uploaded successfully!");
     } catch (error) {
       console.error("Error uploading file:", error);
       alert("Error uploading file");
@@ -104,9 +75,16 @@ const ImageClassify = () => {
     setLoading(false);
   };
 
+  const resetImage = () => {
+    setLocalImageUrl("");
+    setSelectedFile("");
+    setCategory("");
+  };
+
   return (
     <Card variant="outlined">
       <CardActionArea
+        onClick={resetImage}
         onChange={handleFileChange}
         component="label"
         role={undefined}
@@ -135,22 +113,36 @@ const ImageClassify = () => {
                   <VisuallyHiddenInput type="file" />
                 </>
               ) : (
-                <>
+                <Container
+                  sx={{
+                    display: "flex",
+                    height: "100%",
+                    // width: "100%",
+                    justifyContent: "space-around",
+                    // alignItems: "center",
+                  }}
+                >
                   <img
                     src={localImageUrl}
                     alt="Selected"
-                    style={{ height: "80px" }}
+                    style={{ height: "100%" }}
                   />
-                  {category && (
-                    <Box sx={{ mt: 2 }}>
+
+                  {category ? (
+                    <Box sx={{ width: "120px", paddingLeft: 1 }}>
                       <Typography variant="h6">可能的分類</Typography>
                       {category}
 
                       {/* <img src={imageUrl} alt="Uploaded" style={{ maxWidth: "100%" }} /> */}
                     </Box>
+                  ) : (
+                    <Box sx={{ width: "120px", paddingLeft: 1 }}>
+                      <Typography variant="h6">可能的分類</Typography>
+                      <Skeleton variant="h6" width={"100%"} height={"60px"} />
+                    </Box>
                   )}
                   <VisuallyHiddenInput type="file" />
-                </>
+                </Container>
               )}
             </Box>
           </Box>
