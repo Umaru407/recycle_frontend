@@ -39,7 +39,8 @@ const ImageClassify = () => {
     setPlaceData,
     loading,
     setLoading,
-    category, setCategory
+    category,
+    setCategory,
   } = useContext(RecycleContext);
 
   // useEffect(() => {
@@ -84,7 +85,9 @@ const ImageClassify = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/getClassify",
+        // "http://localhost:3000/getClassify",
+        "https://recycleclassify-esci3h3qia-de.a.run.app/getClassify",
+        // "http://localhost:3000/getClassify",
         formData,
         {
           headers: {
@@ -92,7 +95,7 @@ const ImageClassify = () => {
           },
         }
       );
-      setCategory(response.data.result); 
+      setCategory(response.data.result);
       alert("File uploaded successfully!");
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -101,35 +104,8 @@ const ImageClassify = () => {
     setLoading(false);
   };
 
-  //   const handleCategoryChange = async (event) => {
-  //     const city = event.target.value;
-  //     setSelectedCity(city);
-  //     setLoading(true);
-
-  //     try {
-  //       const response = await axios.get(
-  //         `https://recycle-backend.onrender.com/api/address/${city}`
-  //         //`http://localhost:8080/api/address/${city}`
-  //       );
-  //       setPlaceData(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching city data:", error);
-  //       setPlaceData(null);
-  //     }
-
-  //     setLoading(false);
-  //   };
-
   return (
-    <Card
-      variant="outlined"
-      // sx={{
-      //   // width: "100%",
-      //   border: "1px solid #ccc",
-      //   padding: 2,
-      // }}
-      //   onClick={handleFileChange}
-    >
+    <Card variant="outlined">
       <CardActionArea
         onChange={handleFileChange}
         component="label"
@@ -169,12 +145,11 @@ const ImageClassify = () => {
                     <Box sx={{ mt: 2 }}>
                       <Typography variant="h6">可能的分類</Typography>
                       {category}
-                      
+
                       {/* <img src={imageUrl} alt="Uploaded" style={{ maxWidth: "100%" }} /> */}
                     </Box>
-                    
                   )}
-                   <VisuallyHiddenInput type="file" />
+                  <VisuallyHiddenInput type="file" />
                 </>
               )}
             </Box>

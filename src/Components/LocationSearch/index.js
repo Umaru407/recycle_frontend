@@ -37,35 +37,15 @@ const taiwanCities = [
 ];
 
 export default function LocationSearch() {
-  const [selectedTime, setSelectedTime] = React.useState([]);
-  const [dayData, setDayData] = React.useState(null);
 
   const {
     selectedCity,
     setSelectedCity,
-    placeData,
-    setPlaceData,
-    loading,
-    setLoading,
   } = useContext(RecycleContext);
 
   const handleCityChange = async (event) => {
     const city = event.target.value;
     setSelectedCity(city);
-    // setLoading(true);
-
-    // try {
-    //   const response = await axios.get(
-    //     `https://recycle-backend.onrender.com/api/address/${city}`
-    //     //`http://localhost:8080/api/address/${city}`
-    //   );
-    //   setPlaceData(response.data);
-    // } catch (error) {
-    //   console.error("Error fetching city data:", error);
-    //   setPlaceData(null);
-    // }
-
-    // setLoading(false);
   };
 
   return (

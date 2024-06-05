@@ -47,36 +47,6 @@ export default function TimeSearch() {
     setSelectedTime,
   } = useContext(RecycleContext);
 
-  // const handleWeekChange = async (event) => {
-  //   const day = event.target.value;
-  //   setSelectedTime(day);
-  // setLoading(true);
-  // // console.log( day);
-  // const dayMapping = {
-  //   星期一: 1,
-  //   星期二: 2,
-  //   星期三: 3,
-  //   星期四: 4,
-  //   星期五: 5,
-  //   星期六: 6,
-  //   星期日: 0,
-  // };
-  // const result = day.map((d) => dayMapping[d]).join(",");
-
-  // console.log("result", result);
-  // try {
-  //   const response = await axios.get(
-  //     `http://localhost:3000/api/opening-weekday/?days=${result}`
-  //   );
-  //   setPlaceData(response.data);
-  //   console.log("data", response.data.length);
-  // } catch (error) {
-  //   console.error("Error fetching Day data:", error);
-  //   // setDayData(null);
-  // }
-
-  // setLoading(false);
-  // };
   const handleWeekChange = (event) => {
     const value = event.target.value;
     if (value.includes(allDays)) {
