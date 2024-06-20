@@ -45,6 +45,7 @@ export default function TimeSearch() {
     setLoading,
     selectedTime,
     setSelectedTime,
+    coordinatesChecked
   } = useContext(RecycleContext);
 
   const handleWeekChange = (event) => {
@@ -84,6 +85,7 @@ export default function TimeSearch() {
         labelId="demo-multiple-checkbox-label"
         id="demo-multiple-checkbox"
         multiple
+        disabled = {coordinatesChecked}
         value={selectedTime}
         onChange={handleWeekChange}
         input={<OutlinedInput label="選擇星期" />}

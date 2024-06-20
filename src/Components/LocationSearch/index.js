@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import CircularProgress from "@mui/material/CircularProgress";
 import RecycleContext from "../../context/RecycleContext";
+import { FormControlLabel, Switch } from "@mui/material";
 
 const taiwanCities = [
   "所有縣市",
@@ -37,10 +38,13 @@ const taiwanCities = [
 ];
 
 export default function LocationSearch() {
-
   const {
     selectedCity,
     setSelectedCity,
+    coordinatesChecked,
+    setError,
+    setCoordinatesChecked,
+    setCoordinates,
   } = useContext(RecycleContext);
 
   const handleCityChange = async (event) => {
@@ -58,6 +62,7 @@ export default function LocationSearch() {
           value={selectedCity}
           label="選擇縣市"
           onChange={handleCityChange}
+          disabled={coordinatesChecked}
         >
           {taiwanCities.map((city, index) => (
             <MenuItem key={index} value={city}>
